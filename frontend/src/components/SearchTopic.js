@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, List, ListItem, ListItemText, Paper, Typography, Box } from '@mui/material';
+import ContentNotFoundPopup from './ContentNotFoundPopup';
 
-const SearchTopic = () => {
+const SearchTopic = ({ onSearch }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
+    const [error, setError] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.get(`http://127.0.0.1:8000/search?query=${query}`);
-            setResults(response.data);
+            if (response.data.length === 0) {
+                setShowPopup(true);
+            } else {
+                setResults(response.data);
+                setError(null);
+                setShowPopup(false);
+                onSearch(response.data);
+            }
         } catch (error) {
-            // console.error('Error searching topics:', error);
+            setError('No results found for searching topics');
+            setShowPopup(false);
         }
     };
 
@@ -36,6 +47,11 @@ const SearchTopic = () => {
                     </Button>
                 </Box>
             </form>
+            {error && (
+                <Typography variant="body1" style={{ color: 'red' }}>
+                    {error}
+                </Typography>
+            )}
             <List>
                 {results.map((result, index) => (
                     <ListItem key={index}>
@@ -43,6 +59,11 @@ const SearchTopic = () => {
                     </ListItem>
                 ))}
             </List>
+            <ContentNotFoundPopup
+                open={showPopup}
+                onClose={() => setShowPopup(false)}
+                query={query}
+            />
         </Paper>
     );
 };
