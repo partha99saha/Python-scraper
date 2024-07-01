@@ -11,7 +11,7 @@ function App() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">
-            Geeks for Geeks Scraper
+            Python Scraper
           </Typography>
         </Toolbar>
       </AppBar>

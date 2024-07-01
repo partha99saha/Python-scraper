@@ -4,6 +4,7 @@ from app.scraper import scrape_topics
 
 router = APIRouter()
 
+
 @router.get("/topics", response_model=List[str])
 def get_topics():
     try:
@@ -12,6 +13,7 @@ def get_topics():
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.get("/search")
 def search_topic(query: str):

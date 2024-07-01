@@ -1,12 +1,10 @@
-from fastapi import FastAPI
-from app.routes import router
+import sys
+import os
 
-app = FastAPI()
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from app import app
 
-app.include_router(router)
+if __name__ == "__main__":
+    import uvicorn
 
-@app.get("/")
-def read_root():
-    return {"message": "Python Scraper API"}
-
-# uvicorn app.main:app --reload
+    uvicorn.run(app, host="0.0.0.0", port=8000)
