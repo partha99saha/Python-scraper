@@ -12,7 +12,7 @@ const SearchTopic = () => {
             const response = await axios.get(`http://127.0.0.1:8000/search?query=${query}`);
             setResults(response.data);
         } catch (error) {
-            console.error('Error searching topics:', error);
+            // console.error('Error searching topics:', error);
         }
     };
 

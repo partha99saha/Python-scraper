@@ -11,7 +11,7 @@ const TopicsList = () => {
                 const response = await axios.get('http://127.0.0.1:8000/topics');
                 setTopics(response.data);
             } catch (error) {
-                console.error('Error fetching topics:', error);
+                // console.error('Error fetching topics:', error);
             }
         };
         fetchTopics();
