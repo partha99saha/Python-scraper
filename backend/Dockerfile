@@ -41,12 +41,3 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 # Build Docker Image and run:
 # sudo docker build -t scrapes-app .
 # sudo docker run -p 8000:8000 scrapes-app
-
-# To push a Docker image to repository:
-# https://hub.docker.com/
-# docker tag scrapes-app partha99saha/scrapes-app:latest
-# docker login
-# docker push partha99saha/scrapes-app:latest
-
-# Image has pushed to :
-# docker pull partha99saha/scrapes-app:latest
